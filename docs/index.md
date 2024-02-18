@@ -46,36 +46,49 @@ toc: false
 
 <div class="hero">
   <h1>Bayesian Learning</h1>
-  <h2>A collection of Observable dashboards for the Bayesian Learning book</h2>
-</div>
-
-<div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "Distributions",
-      subtitle: "Up and to the right!",
-      width,
-      y: {grid: true, label: "Awesomeness"},
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
-      ]
-    }))
-  }</div>
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
-      width,
-      grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
-      marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
-      ]
-    }))
-  }</div>
+  <h2>A collection of reactive dashboards for the Bayesian Learning book</h2>
 </div>
 
 
+```js
+import jstat from "npm:jstat";
+import {plotGeometricPDF, plotExponPDF} from "./components/distribution_plots.js";
+```
+<div class="grid grid-cols-2">
+  <div class="card">
+    ${paramSlider}<br>
+    ${resize((width) => plotGeometricPDF(p, quantile, true, width))}
+  </div>
+  <div class="card">
+    ${paramSlider2}<br>
+    ${resize((width) => plotExponPDF(lambda, quantile2, true, width))}
+  </div>
+</div>
+
+```js
+const paramSlider = Inputs.form([
+      Inputs.range([0.01, 0.99], {value: 0.3, step: 0.01, label: tex`p`}),
+      Inputs.range([0, 50], {value: 1, step: 1, label: "quantile"})
+    ]);
+const params = Generators.input(paramSlider);
+```
+
+```js
+const p = params[0];
+const quantile = params[1];
+const geometriccdf = jstat.negbin.cdf(quantile, 1, p);
+```
+
+```js
+const paramSlider2 = Inputs.form([
+      Inputs.range([0, 10], {value: 2, step: 0.1, label: tex`\lambda`}),
+      Inputs.range([0, 10], {value: 1, step: 0.1, label: "quantile"})
+    ]);
+const params2 = Generators.input(paramSlider2);
+```
+
+```js
+const lambda = params2[0];
+const quantile2 = params2[1];
+const exponcdf = jstat.exponential.cdf(quantile2, lambda);
+```

@@ -1,6 +1,5 @@
 ---
 toc: false
-theme: slate
 title: Probability distributions
 ---
 
@@ -47,26 +46,90 @@ title: Probability distributions
 </style>
 
 ## Distributions
+<br><br>
+```js
+import {plotBinomialPDF, plotGeometricPDF, plotPoissonPDF} from "./components/distribution_plots.js";
+```
 
-<div class="grid grid-cols-4">
-  <div class="card">
-  <a href="distributions/poisson"><b>Poisson</b><br>
-    <center><img src="images/plt_poisson.svg" alt="Poisson distribution image" 
-      style="width:128px;height:128px;">
-    </a></center>
+
+### Discrete distributions
+
+<div class="grid grid-cols-2">
+  <div class="grid grid-cols-4">
+    <div class="card">
+      <center>
+      <a href="distributions/binomial"><b>Binomial</b><br><br>
+        ${resize((width) => plotBinomialPDF(10, 0.3, 1, false, width))}
+      </center>
+    </div>
+    <div class="card">
+      <center>
+      <a href="distributions/geometric"><b>Geometric</b><br><br>
+        ${resize((width) => plotGeometricPDF(0.4, 2, false, width))}
+      </center>
+    </div>
+    <div class="card">
+      <center>
+      <a href="distributions/poisson"><b>Poisson</b><br><br>
+        ${resize((width) => plotPoissonPDF(3, 1, false, width))}
+      </center>
+    </div>
+    <div class="card">
+    </div>
   </div>
-  <div class="card">
-    <b>Gamma</b>
-    <center>
-    <img src="images/plt_gamma.svg" alt="Gamma distribution image" 
-      style="width:128px;height:128px;">
-    </center>
-  </div>
-  <div class="card">
-    <b>Normal</b>
-  </div>
-  <div class="card">
-    Weibull
+  <div class="grid grid-cols-4">
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>
   </div>
 </div>
 
+```js
+import {plotBetaPDF, plotExponPDF, plotCauchyPDF, plotChi2PDF} from "./components/distribution_plots.js";
+```
+
+### Continuous distributions
+
+<div class="grid grid-cols-2">
+  <div class="grid grid-cols-4">
+    <div class="card">
+      <center>
+      <a href="distributions/beta"><b>Beta</b><br><br>
+        ${resize((width) => plotBetaPDF(2, 3, 0.3, false, width))}
+      </center>
+    </div>
+    <div class="card">
+      <center>
+      <a href="distributions/exponential"><b>Exponential</b><br><br>
+        ${resize((width) => plotExponPDF(1, 1, false, width))}
+      </center>
+    </div>
+    <div class="card">
+      <center>
+      <a href="distributions/cauchy"><b>Cauchy</b><br><br>
+        ${resize((width) => plotCauchyPDF(0, 1, -2, false, width))}
+      </center>
+    </div>
+    <div class="card">
+      <center>
+      <a href="distributions/chi2"><b>Chi2</b><br><br>
+        ${resize((width) => plotChi2PDF(3, 1, false, width))}
+      </center>
+    </div>  
+  </div>
+  <div class="grid grid-cols-4">
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>
+    <div class="card">
+    </div>  
+  </div>
+</div>

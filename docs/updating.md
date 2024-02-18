@@ -1,6 +1,5 @@
 ---
 toc: false
-theme: slate
 title: Bayesian updating
 ---
 
